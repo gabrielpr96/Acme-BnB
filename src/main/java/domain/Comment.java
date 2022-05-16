@@ -3,11 +3,17 @@ package domain;
 
 import java.util.Date;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-public class Comment {
+@Entity
+@Access(AccessType.PROPERTY)
+public class Comment extends DomainEntity {
 
 	private String	title;
 	private Date	date;

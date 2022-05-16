@@ -1,9 +1,15 @@
 
 package domain;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Attribute {
+@Entity
+@Access(AccessType.PROPERTY)
+public class Attribute extends DomainEntity {
 
 	private String name;
 

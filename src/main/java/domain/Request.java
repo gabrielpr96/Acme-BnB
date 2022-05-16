@@ -3,9 +3,14 @@ package domain;
 
 import java.util.Date;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 
-public class Request {
+@Entity
+@Access(AccessType.PROPERTY)
+public class Request extends DomainEntity {
 
 	private Date		entryDate;
 	private Date		exitDate;

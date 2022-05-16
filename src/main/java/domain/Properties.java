@@ -1,12 +1,17 @@
 
 package domain;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Properties {
+@Entity
+@Access(AccessType.PROPERTY)
+public class Properties extends DomainEntity {
 
 	private String	name;
 	private double	rate;
