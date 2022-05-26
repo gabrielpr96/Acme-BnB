@@ -1,8 +1,8 @@
 /*
  * Authority.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -27,7 +27,7 @@ public class Authority implements GrantedAuthority {
 
 	// Constructors -----------------------------------------------------------
 
-	private static final long	serialVersionUID	= 1L;
+	private static final long serialVersionUID = 1L;
 
 
 	public Authority() {
@@ -39,6 +39,9 @@ public class Authority implements GrantedAuthority {
 
 	public static final String	ADMIN		= "ADMIN";
 	public static final String	CUSTOMER	= "CUSTOMER";
+	public static final String	LESSOR		= "LESSOR";
+	public static final String	AUDITOR		= "AUDITOR";
+	public static final String	TENANT		= "TENANT";
 
 	// Attributes -------------------------------------------------------------
 
@@ -46,7 +49,7 @@ public class Authority implements GrantedAuthority {
 
 
 	@NotBlank
-	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.CUSTOMER + "$")
+	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.CUSTOMER + "|" + Authority.LESSOR + "|" + Authority.AUDITOR + "|" + Authority.TENANT + "$")
 	@Override
 	public String getAuthority() {
 		return this.authority;
@@ -67,7 +70,15 @@ public class Authority implements GrantedAuthority {
 		result.add(authority);
 
 		authority = new Authority();
-		authority.setAuthority(Authority.CUSTOMER);
+		authority.setAuthority(Authority.LESSOR);
+		result.add(authority);
+
+		authority = new Authority();
+		authority.setAuthority(Authority.AUDITOR);
+		result.add(authority);
+
+		authority = new Authority();
+		authority.setAuthority(Authority.TENANT);
 		result.add(authority);
 
 		return result;

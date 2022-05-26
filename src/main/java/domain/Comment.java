@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -29,7 +31,7 @@ public class Comment extends DomainEntity {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
-
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDate() {
 		return this.date;
 	}
@@ -38,7 +40,7 @@ public class Comment extends DomainEntity {
 		this.date = date;
 	}
 
-	@Length
+	@Length(min = 100, max = 200)
 	public String getDescription() {
 		return this.description;
 	}
@@ -47,7 +49,7 @@ public class Comment extends DomainEntity {
 		this.description = description;
 	}
 
-	@Range
+	@Range(min = 0, max = 5)
 	public int getRate() {
 		return this.rate;
 	}

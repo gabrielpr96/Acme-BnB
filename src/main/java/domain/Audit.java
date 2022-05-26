@@ -6,6 +6,9 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -19,6 +22,7 @@ public class Audit extends DomainEntity {
 	private boolean	draft;
 
 
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDate() {
 		return this.date;
 	}
@@ -50,6 +54,31 @@ public class Audit extends DomainEntity {
 
 	public void setDraft(final boolean draft) {
 		this.draft = draft;
+	}
+
+
+	//Relationships
+
+	private Properties	properties;
+	private Auditor		auditor;
+
+
+	@ManyToOne(optional = false)
+	public Properties getProperties() {
+		return this.properties;
+	}
+
+	public void setProperties(final Properties properties) {
+		this.properties = properties;
+	}
+
+	@ManyToOne(optional = false)
+	public Auditor getAuditor() {
+		return this.auditor;
+	}
+
+	public void setAuditor(final Auditor auditor) {
+		this.auditor = auditor;
 	}
 
 }

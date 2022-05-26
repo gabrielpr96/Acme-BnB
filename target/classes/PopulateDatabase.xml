@@ -57,10 +57,228 @@
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
-	
-	<bean class = "domain.Lessor">
-		
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="lessor1" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="LESSOR" />
+				</bean>
+			</list>
+		</property>
 	</bean>
 	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="lessor2" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="LESSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="tenant1" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TENANT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Other domain beans come here -->
+	
+	<!-- Administrators -->
+		
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="administrator1" />
+		<property name="lastName" value="paco" />
+		<property name="email" value="administrator1@mail.com" />
+		<property name="phone" value="Phone-1" />
+		<property name="photo" value="https://www.google.com" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean> 
+	
+	<!-- Requests -->
+	
+	<bean id="request1" class="domain.Request">
+		<property name="entryDate" value="01/02/2019 23:59" />
+		<property name="exitDate" value="02/02/2019 23:59" />
+		<property name="smoker" value="true" />
+		<property name="creditCard">
+			<bean id="creditcard1" class="domain.CreditCard">
+				<property name="holder" value="BBVA" />
+				<property name="expirationMonth" value="12" />
+				<property name="expirationYear" value="2023" />
+				<property name="brand" value="MasterCard" />
+				<property name="number" value="1111111111111111" />
+				<property name="cvv" value="919" />
+			</bean>
+		</property>
+		<property name="status" value="ACEPTADO" />
+		<property name="fee" value="50" />
+		<property name="properties" ref="properties1" />
+	</bean> 
+
+	<!-- Tenants -->
+	
+	<bean id="tenant1" class="domain.Tenant">
+		<property name="name" value="tenant1" />
+		<property name="lastName" value="manolo" />
+		<property name="email" value="tenant1@mail.com" />
+		<property name="phone" value="Phone-3" />
+		<property name="photo" value="https://www.google.com" />
+		<property name="creditCard">
+			<bean id="creditcard1" class="domain.CreditCard">
+				<property name="holder" value="BBVA" />
+				<property name="expirationMonth" value="12" />
+				<property name="expirationYear" value="2023" />
+				<property name="brand" value="MasterCard" />
+				<property name="number" value="1111111111111111" />
+				<property name="cvv" value="919" />
+			</bean>
+		</property>
+		<property name="requests">
+			<list>
+				<ref bean="request1" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount5" />
+
+	</bean> 
+	
+	<!-- Lessors -->
+	
+	<bean id="lessor1" class="domain.Lessor">
+		<property name="name" value="lessor1" />
+		<property name="lastName" value="alfredo" />
+		<property name="email" value="lessor1@mail.com" />
+		<property name="phone" value="Phone-2" />
+		<property name="photo" value="https://www.google.com" />
+		<property name="creditCard">
+			<bean id="creditcard1" class="domain.CreditCard">
+				<property name="holder" value="BBVA" />
+				<property name="expirationMonth" value="12" />
+				<property name="expirationYear" value="2023" />
+				<property name="brand" value="MasterCard" />
+				<property name="number" value="1111111111111111" />
+				<property name="cvv" value="919" />
+			</bean>
+		</property>
+		<property name="userAccount" ref="userAccount4" />
+	</bean> 
+	
+		<bean id="lessor2" class="domain.Lessor">
+		<property name="name" value="lessor2" />
+		<property name="lastName" value="fernando" />
+		<property name="email" value="lessor2@mail.com" />
+		<property name="phone" value="Phone-9" />
+		<property name="photo" value="https://www.google.com" />
+		<property name="creditCard">
+			<bean id="creditcard1" class="domain.CreditCard">
+				<property name="holder" value="Fernando Díaz Real" />
+				<property name="expirationMonth" value="12" />
+				<property name="expirationYear" value="2023" />
+				<property name="brand" value="MasterCard" />
+				<property name="number" value="1111111111111111" />
+				<property name="cvv" value="919" />
+			</bean>
+		</property>
+		<property name="userAccount" ref="userAccount6" />
+	</bean> 
+	
+	<!-- Properties -->
+	
+	<bean id="properties1" class="domain.Properties">
+		<property name="name" value="Casita rural" />
+		<property name="rate" value="4" />
+		<property name="description" value="Muy bonita" />
+		<property name="address" value="El campo" />
+		<property name="country" value="Spain" />
+		<property name="province" value="Huelva" />
+		<property name="state" value="??" />
+		<property name="town" value="Aracena" />
+		<property name="capacity" value="8" />
+		<property name="lessor" ref="lessor1" />
+	</bean> 
+	
+	<bean id="properties2" class="domain.Properties">
+		<property name="name" value="Piso en el centro" />
+		<property name="rate" value="2" />
+		<property name="description" value="Alta" />
+		<property name="address" value="El campo" />
+		<property name="country" value="Spain" />
+		<property name="province" value="Huelva" />
+		<property name="state" value="??" />
+		<property name="town" value="Aracena" />
+		<property name="capacity" value="8" />
+		<property name="lessor" ref="lessor1" />
+	</bean> 
+	
+	<bean id="properties3" class="domain.Properties">
+		<property name="name" value="Casa pueblo" />
+		<property name="rate" value="5" />
+		<property name="description" value="En el pueblo" />
+		<property name="address" value="Las Palmeras" />
+		<property name="country" value="Spain" />
+		<property name="province" value="Huelva" />
+		<property name="state" value="??" />
+		<property name="town" value="Aracena" />
+		<property name="capacity" value="8" />
+		<property name="lessor" ref="lessor2" />
+	</bean> 
+	
+	<!-- Addss -->
+	
+	<bean id="adds1" class="domain.Adds">
+		<property name="value" value="Dinero" />
+		<property name="propertieses">
+			<list>
+				<ref bean="properties1" />
+			</list>
+		</property>
+		<property name="attributes">
+			<list>
+				<ref bean="attribute1" />
+				<ref bean="attribute2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="adds2" class="domain.Adds">
+		<property name="value" value="Cosa" />
+		<property name="propertieses">
+			<list>
+				<ref bean="properties2" />
+				<ref bean="properties3" />
+			</list>
+		</property>
+		<property name="attributes">
+			<list>
+				<ref bean="attribute2" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Attributes -->
+	
+	<bean id="attribute1" class="domain.Attribute">
+		<property name="name" value="Tmp" />
+		<property name="addss">
+			<list>
+				<ref bean="adds1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="attribute2" class="domain.Attribute">
+		<property name="name" value="Tmp2" />
+	</bean>
 </beans>
